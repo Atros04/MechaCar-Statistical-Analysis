@@ -1,0 +1,49 @@
+```{r}
+# Import packages and Read MPG Data
+library(dplyr)
+CarMPG <- read.csv("MechaCar_mpg.csv")
+carDF <- as.data.frame(CarMPG)
+```
+
+```{r}
+# Deliverable 1
+# Run the linear regression on the columns
+summary(lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_clearance + AWD,data = carDF))
+```
+```{r}
+# Deliverable 2
+# Read suspension Data
+coilDF <- as.data.frame(read.csv("Suspension_Coil.csv"))
+
+# Calculate statistics of all the coils
+total_summary <- coilDF %>% summarise(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+
+# Calculate statistics of all the coils
+coil_summary <- coilDF %>% group_by(Manufacturing_Lot) %>% summarise(Mean=mean(PSI),Median=median(PSI),Variance=var(PSI),SD=sd(PSI))
+```
+
+```{r}
+# Deliverable 3.1
+# Run a T-Test against the coils together.
+t.test(coilDF$PSI,mu=1500)
+```
+```{r}
+# Deliverable 3.2.1
+# Run a T-Test against the coil lots.
+Lot1 <- subset(coilDF,Manufacturing_Lot == "Lot1",)
+t.test(Lot1$PSI,mu=1500)
+```
+```{r}
+# Deliverable 3.2.2
+# Run a T-Test against the coil lots.
+Lot2 <- subset(coilDF,Manufacturing_Lot == "Lot2",)
+t.test(Lot2$PSI,mu=1500)
+```
+
+```{r}
+# Deliverable 3.2.3
+# Run a T-Test against the coil lots.
+Lot3 <- subset(coilDF,Manufacturing_Lot == "Lot3",)
+t.test(Lot3$PSI,mu=1500)
+```
+
